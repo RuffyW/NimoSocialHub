@@ -1,6 +1,7 @@
 {
     auto_https disable_redirects
     admin off
+    default_sni {$NIMO_LAN_IP}
 }
 https://{$NIMO_LAN_IP}:8443 {
     tls internal
