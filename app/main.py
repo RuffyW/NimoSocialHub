@@ -570,7 +570,7 @@ def confirm_backup(request: Request):
 
 @app.get("/backups/{filename}")
 def download_backup(request: Request,filename: str):
-    if not re.fullmatch(r"nimo-\d{8}-\d{6}\.tar\.age",filename) or not (config.BACKUPS/filename).is_file():
+    if not re.fullmatch(r"nimo-\d{8}-\d{6}(?:-[a-f0-9]{8})?\.tar\.age",filename) or not (config.BACKUPS/filename).is_file():
         raise HTTPException(404)
     return FileResponse(config.BACKUPS/filename,filename=filename,media_type="application/octet-stream")
 

@@ -1,5 +1,7 @@
 # Installation und Betrieb
 
+Stand 27.09.2026: Der Hub läuft auf dem Pi unter `https://192.168.178.91:8443`. Die folgenden Schritte bleiben als reproduzierbare Installations- und Wiederherstellungsanleitung erhalten. Für Browserzugriff muss die lokale CA auf dem jeweiligen Gerät noch vertrauenswürdig eingerichtet werden.
+
 ## 1. Bestand prüfen
 
 Quellcode in ein **neues** Verzeichnis `/home/raphi/nimo-social-hub` übertragen, ohne `.venv`, `.tools`, `runtime`, `.env`, `test-results` oder Caches. Nicht über ein vorhandenes anderes Projekt kopieren. Das Skript `scripts/pi-preflight.sh` liest ausschließlich den Bestand. Auf dem Pi:

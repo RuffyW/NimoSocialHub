@@ -67,7 +67,7 @@ def full():
         raise ValueError("Bitte zuerst den öffentlichen age-Empfänger in Einstellungen hinterlegen.")
     if shutil.disk_usage(config.DATA).free < used + config.RESERVE:
         raise ValueError("Nicht genügend Speicher für eine Vollsicherung zusätzlich zur Reserve.")
-    filename = f"nimo-{time.strftime('%Y%m%d-%H%M%S', time.gmtime())}.tar.age"
+    filename = f"nimo-{time.strftime('%Y%m%d-%H%M%S', time.gmtime())}-{os.urandom(4).hex()}.tar.age"
     target = config.BACKUPS / filename
     temporary = target.with_suffix(".partial")
     try:
@@ -130,8 +130,12 @@ def restore(archive, identity, destination):
             database.execute("UPDATE jobs SET status='pending', lease_until=NULL, owner=NULL WHERE status='running'")
             database.execute("UPDATE media SET preview=NULL, preview_status='pending'")
             database.commit()
-        for name in ("data", "media", "secrets"):
+        for name in ("data", "secrets"):
             shutil.copytree(unpacked / name, destination / name)
+        if (unpacked / "media").exists():
+            shutil.copytree(unpacked / "media", destination / "media")
+        for name in ("originals", "previews", "tmp"):
+            (destination / "media" / name).mkdir(parents=True, exist_ok=True)
         shutil.copy2(unpacked / "config.json", destination / "config.json")
         if os.name != "nt":
             for directory in [destination, *[p for p in destination.rglob("*") if p.is_dir()]]:

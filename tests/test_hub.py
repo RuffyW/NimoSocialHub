@@ -115,6 +115,23 @@ def test_encrypted_restore(client,tmp_path,monkeypatch):
     db.close()
     assert (destination/"secrets/vault.key").read_bytes() == (config.SECRETS/"vault.key").read_bytes()
 
+def test_restore_empty_media_archive(client,tmp_path,monkeypatch):
+    import os,subprocess
+    from app.models import Setting
+    tool=config.ROOT/".tools/age"
+    if tool.is_dir():
+        monkeypatch.setenv("PATH",str(tool)+os.pathsep+os.environ["PATH"])
+    identity=tmp_path/"identity.txt"
+    subprocess.run(["age-keygen","-o",str(identity)],capture_output=True,check=True)
+    recipient=subprocess.check_output(["age-keygen","-y",str(identity)],text=True).strip()
+    with transaction() as session:
+        session.merge(Setting(key="backup_recipient",value=recipient))
+    destination=tmp_path/"restored"
+    backup.restore(config.BACKUPS/backup.full(),identity,destination)
+    assert (destination/"media/originals").is_dir()
+    assert (destination/"media/previews").is_dir()
+    assert (destination/"media/tmp").is_dir()
+
 def test_leases_retries_and_api_errors(client):
     import httpx
     import pytest

@@ -16,9 +16,9 @@ Nicht enthalten: automatische Veröffentlichung, TikTok, Creator-Verwaltung, Nac
 
 ## Aktueller Prüfstand
 
-Die Anwendung wurde lokal unter Windows/Python 3.14 getestet. Die Produktion verwendet Python 3.13. ARM64-Wheels sämtlicher Laufzeitabhängigkeiten wurden erfolgreich aufgelöst und heruntergeladen. Die offiziellen Python-/Caddy-Imagekataloge führen ARM64 auf. Das ersetzt keinen ARM64-Containerlauf.
+Die Anwendung wurde lokal unter Windows/Python 3.14 und auf dem Raspberry Pi mit Python 3.13 im ARM64-Container geprüft. Der Pi-Build, Datenbankinitialisierung, gesunde Web-/Worker-Container, HTTPS über Caddy, Anmeldung, verschlüsselte Sicherung und Wiederherstellung der Pi-Sicherung auf dem PC sind bestätigt.
 
-**Noch ausstehend:** Docker-/Snap-/Portprüfung und Containerstart auf dem Pi, echte Instagram-Abrufe mit @meinnimo, FFmpeg-Videoprüfung im Produktionsimage sowie Lastmessung und Zertifikatsvertrauen auf den tatsächlichen Endgeräten. Es wurden keine Pi-Dienste geändert. Der SSH-Zugang war mangels akzeptierter Anmeldedaten nicht möglich. Keine Kennzahlen aus dem realen Konto wurden erfunden.
+**Noch ausstehend:** echte Instagram-Abrufe mit @meinnimo, Video-Upload und Poster mit einem echten Video, Lastmessung bei großem Upload sowie das Einrichten des Zertifikatsvertrauens im Browser und auf dem Smartphone. Die bestehenden Orivan-Container laufen weiter. Keine Kennzahlen aus dem realen Konto wurden erfunden.
 
 [Installation, Betrieb und Wiederherstellung](docs/BETRIEB.md) · [Instagram-Einrichtung und Grenzen](docs/INSTAGRAM.md) · [Architektur](docs/ARCHITEKTUR.md) · [Prüfprotokoll](docs/PRUEFUNG.md)
 
