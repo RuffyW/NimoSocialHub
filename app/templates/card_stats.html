@@ -1,0 +1,1 @@
+{% for observation in post_stats.get(p.id,[]) %}<small>{{metrics[observation.metric].label}}: {{observation.value|number}}{% if observation.reason %} · {{reasons.get(observation.reason,observation.reason)}}{% endif %}<br>{{'Manuell' if observation.source=='manual' else 'API'}} · {{observation.observed_at|date}}</small>{% endfor %}

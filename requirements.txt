@@ -1,0 +1,12 @@
+alembic==1.20.0
+argon2-cffi==25.1.0
+cryptography==50.0.1
+fastapi==0.141.1
+httpx==0.28.1
+Jinja2==3.1.6
+pillow==12.3.0
+portalocker==4.4.0
+python-multipart==0.0.32
+SQLAlchemy==2.1.1
+tzdata==2026.4
+uvicorn==0.54.0

@@ -1,0 +1,11 @@
+{
+    auto_https disable_redirects
+    admin off
+}
+https://{$NIMO_LAN_IP}:8443 {
+    tls internal
+    request_body {
+        max_size 527MB
+    }
+    reverse_proxy web:8000
+}
